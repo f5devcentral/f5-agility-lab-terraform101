@@ -33,7 +33,7 @@ terraform plan
 terraform apply
 ```
 
-  - This will create BIG-IP, consul, NGINX instances on AWS
+  - This will create BIG-IP, NGINX instances on AWS
   - This will also seed a `terraform.tfvars` file in the `as3` directory for use in the next step
   - This step
   - It may take up to 5 minutes or after the run is complete for the environment to become ready. The URL for the BIG-IP UI is provided as part of the output.  Verify you can reach the UI before proceeding.
