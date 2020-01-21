@@ -20,8 +20,8 @@ The `terraform` directory has tf files for creating instances for consul, f5, ia
 ## Steps 
 - Clone the repository & change working directory to terraform
 ```
-git clone https://github.com/hashicorp/f5-terraform-consul-sd-webinar
-cd f5-terraform-consul-sd-webinar/terraform/
+git clone https://github.com/f5devcentral/f5-agility-lab-terraform101.git
+cd f5-agility-lab-terraform101
 ```
 - Create Terraform run
 - Modify `terraform.tfvars.example` and add a prefix to identify your resources
@@ -54,23 +54,16 @@ terraform apply
 - Now you have Virtual IP and Pool information already configured on BIG-IP in partition defined in the consul.json file.
 
 # How to test?
-- You can access backend applications using http://VIP_IP:8080 where VIP_IP is the Elastic IP which maps to BIG-IP Private VIP_IP.
-- The NGINX servers are already in Auto scale group with consul agents running and sending all information to Consul server.
-- Use case is when you destroy or bring down  one of the NGINX server, BIG-IP AS3 will poll the consul server and update the pool members automatically
-- So as the NGINX servers are going up and down the BIG-IP Pool members are updated automatically without manual intervention.  
-- Use http://consul_public_IP:8500 to access the consul server and check the status of consul nodes count
 
 ### Folder as3
 Folder as3 has three files, `main.tf`, `nginx.json` and `variables.tf`. `main.tf` is used to provision `nginx.json` template to BIG-IP once its ready.
 This module attempts to download the rpom automatically, but you can also download the AS3 rpm module from https://github.com/F5Networks/f5-appsvcs-extension before doing terraform apply.
 
 ### Folder scripts
-`consul.sh` is used to install consul
 `f5.tpl` is used to change the admin password.
 `nginx.sh` is used to install consul agent on nginx servers
 
 
 ### Product Versions
-- BIG-IP image used is 14.1 version
+- BIG-IP image used is 15.1 version
 - AS3 rpm used is [3.7.0 version](https://github.com/F5Networks/f5-appsvcs-extension/raw/v3.7.0/dist/latest/f5-appsvcs-3.7.0-7.noarch.rpm)
-- HashiCorp & F5 webinar based on https://clouddocs.f5.com/cloud/public/v1/aws/AWS_singleNIC.html
