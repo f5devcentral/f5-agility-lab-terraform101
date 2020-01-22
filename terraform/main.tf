@@ -20,16 +20,17 @@ data "aws_ami" "ubuntu" {
 
 # Generate a tfvars file for AS3 installation
 data "template_file" "tfvars" {
-  template = "${file("../as3/terraform.tfvars.example")}"
+  template = file("../as3/terraform.tfvars.example")
   vars = {
-    addr     = "${aws_eip.f5.public_ip}",
-    port     = "8443",
+    addr     = aws_eip.f5.public_ip
+    port     = "8443"
     username = "admin"
-    pwd      = "${random_string.password.result}"
+    pwd      = random_string.password.result
   }
 }
 
 resource "local_file" "tfvars" {
-  content  = "${data.template_file.tfvars.rendered}"
+  content  = data.template_file.tfvars.rendered
   filename = "../as3/terraform.tfvars"
 }
+
